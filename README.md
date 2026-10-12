@@ -1,47 +1,103 @@
 # Who Stays On?
 
-A Mixed-Integer Linear Program that decides which shops in a shopping
+A Mixed-Integer Linear Program (MILP) that decides which shops in a shopping
 complex run on the diesel generator during today's load-shedding outage
 windows. Built for the *"Roster Optimisation in Unreliable Grids"*
 hackathon challenge.
 
 > Given a list of shops (each with kW draw + value-per-hour), an outage
 > schedule, generator capacity, fuel budget, and a fuel-tier table, find
-> the schedule that maximises total value while honouring:
+> the schedule that **maximises total value** while honouring:
 > - all "mandatory" shops during outages,
 > - generator capacity per hour,
 > - total fuel budget across the day,
 > - max-consecutive-dark-hours per shop.
 
-## Quick start
+---
 
-### Single documented port: **8000**
+## ⚡ Single start command
 
-| Method            | Command                          | URL                            |
-|-------------------|----------------------------------|--------------------------------|
-| Local (no Docker) | `./run.sh`                       | `http://localhost:8000/`       |
-| Containerised     | `docker compose up --build`      | `http://localhost:8000/`       |
-| Custom port       | `PORT=9000 ./run.sh`             | `http://localhost:9000/`       |
+```bash
+./run.sh
+```
 
-`./run.sh` creates a `backend/.venv` on first run, installs the four
-dependencies (FastAPI, Uvicorn, Pydantic v2, PuLP+HiGHS), and serves both
-the API and the bundled frontend on port 8000.
+That is the **only** command a judge needs. The script will:
 
-## URLs cheat-sheet
+1. Create a `backend/.venv` on first run (cached afterwards).
+2. Install the four dependencies (FastAPI, Uvicorn, Pydantic v2, PuLP+HiGHS).
+3. Boot the API and the bundled vanilla-JS frontend together.
 
-Once the server is running on port 8000:
+> No internet at runtime. No Docker required (though `docker compose up --build` works equivalently).
 
-| Path                  | Purpose                                                  |
-|-----------------------|----------------------------------------------------------|
-| `/`                   | The vanilla-JS frontend (loads `static/index.html`)      |
-| `/static/...`         | CSS / JS assets bundled into the image                    |
-| `/docs`               | Interactive Swagger UI for the API                       |
-| `/openapi.json`       | Machine-readable OpenAPI 3 schema                        |
-| `/api/health` (GET)   | `{"status":"ok",...}` liveness probe                     |
-| `/api/roster` (POST)  | Solve a roster; returns full JSON or `status: infeasible` |
-| `/api/roster/dryrun` (POST) | Validate the payload format without solving        |
+### 🔌 Port
 
-## Repo map
+**The local port is `8000`.** It is hard-coded in `run.sh` and overridable
+via `PORT=9000 ./run.sh` if needed. Once the server prints its banner,
+point any browser at:
+
+| URL                                 | What it serves                          |
+|-------------------------------------|-----------------------------------------|
+| `http://localhost:8000/`            | The roster UI (vanilla-JS frontend)     |
+| `http://localhost:8000/api/roster`  | `POST` — the solver endpoint            |
+| `http://localhost:8000/api/health`  | `GET` — liveness probe                  |
+| `http://localhost:8000/docs`        | Interactive Swagger UI                  |
+
+---
+
+## 🎯 Where the decision logic lives (find it in <2 minutes)
+
+**The entire MILP decision logic is in one file:**
+
+### 📄 `backend/app/solver.py`
+
+Open that file and you are looking at the solver. A quick map:
+
+| Lines in `solver.py` | What is there                                          |
+|---------------------|--------------------------------------------------------|
+| 1–31                | Module docstring with full variable / constraint list  |
+| 41–69               | `Shop`, `FuelTier`, `Problem` dataclasses              |
+| 73–175              | `_validate()` — input validation (Pydantic-style)      |
+| 197–389             | `solve()` — **the MILP itself** (objective + 6 constraints) |
+| 395–425             | `_explain_dark()` — text reason for every dark cell    |
+| 428–472             | `_collect_feasibility_warnings()` — defensive checks   |
+| 475–522             | `_infeasible_response()` — structured 4xx-style reply  |
+
+### 🚦 The 6 solver constraints (rules 3-6 in the problem brief)
+
+In `solve()`, search for the `m +=` lines. Each constraint carries a
+human-readable name (e.g. `mandatory_0_3`, `capacity_2`, `tier_upper_1_4`):
+
+1. **Grid-on hours** — every shop powered for free; generator off.
+2. **Mandatory shops** — forced on for every outage hour.
+3. **Generator capacity** — `sum(kw × x[i,t]) ≤ capacity` and
+   `sum(kw × x[i,t]) ≤ capacity × g[t]` (no "free power during outage").
+4. **Step-function fuel tier** — binary `z[k,t]` selects exactly one tier
+   per running hour, with big-M load-in-bracket constraints.
+5. **Fuel budget** — `Σ litres_per_hour × z[k,t] ≤ fuel_budget_litres`.
+6. **Max-consecutive-dark** — sliding window of size `max_consecutive_dark+1`
+   must contain at least one `x[i,t] = 1`.
+
+### 🔁 End-to-end request flow
+
+```
+Browser / curl  ──(POST /api/roster, JSON body)──▶
+  FastAPI (backend/app/main.py)
+    └─ Pydantic models (backend/app/models.py) — schema check
+       └─ solver.solve(payload)  (backend/app/solver.py)  ◀── THE DECISION LOGIC
+          └─ PuLP + HiGHS (offline, bundled in `highspy` wheel)
+             └─ JSON response
+                └─ static/app.js renders the roster board
+```
+
+If a judge only has two minutes, the path is:
+
+```
+run.sh  →  http://localhost:8000  →  POST /api/roster  →  backend/app/solver.py  →  solve()
+```
+
+---
+
+## 🗂 Repo map
 
 ```
 .
@@ -49,7 +105,7 @@ Once the server is running on port 8000:
 │   ├── app/
 │   │   ├── __init__.py
 │   │   ├── main.py           FastAPI app + endpoints
-│   │   ├── solver.py         MILP solver (PuLP)
+│   │   ├── solver.py         ★ MILP solver (PuLP) — the decision logic
 │   │   └── models.py         Pydantic v2 input schema
 │   └── requirements.txt
 ├── static/                   Vanilla-JS frontend (no CDN, fully offline)
@@ -57,40 +113,21 @@ Once the server is running on port 8000:
 │   ├── app.js
 │   └── styles.css
 ├── evidence/                 Test inputs, broken outputs, fixed outputs
-│   ├── inputs/
-│   ├── fixed_outputs/
-│   ├── broken_outputs/
-│   └── README.md
+│   ├── inputs/               JSON payloads, one per scenario
+│   ├── fixed_outputs/        Reproducible solver output
+│   ├── broken_outputs/       Earlier buggy outputs, kept for context
+│   └── README.md             ★ Bug-fix story (Verification Evidence)
 ├── sample_input.json         Canonical input (12-shop Shapla Complex)
-├── run.sh                    Unified launcher, port 8000
+├── run.sh                    ★ Single start command (port 8000)
 ├── Dockerfile                Single-service image, port 8000
-├── docker-compose.yml        docker compose up --build
+├── docker-compose.yml        `docker compose up --build`
 ├── Who_Stays_On_Problem_Statement.pdf
 └── Juding Criteria.pdf
 ```
 
-## How a request flows
+---
 
-```
-static/index.html  ──(paste JSON, click "Solve")──▶
-  fetch POST /api/roster
-        │
-        ▼
-  FastAPI  ── pydantic RosterRequest validates shape ──▶
-        │
-        ▼
-  solver.solve(payload)  ── MILP (PuLP + HiGHS, fully offline) ──▶
-        │
-        ▼
-  JSON {status, total_value_served, total_fuel_used_litres,
-        hourly_fuel_litres, shops: [...], reasons?: [...]}
-        │
-        ▼
-  static/app.js renders the kpis, the fuel-burn chart, and the
-  Shop × Hour roster table (with hover-reason on dark cells).
-```
-
-## Testing with the bundled evidence
+## 🧪 Testing with the bundled evidence
 
 After `./run.sh`:
 
@@ -102,12 +139,15 @@ for f in evidence/inputs/*.json; do
 done
 ```
 
-Each regenerated file should be byte-identical to the one already in
-`evidence/fixed_outputs/` (the solver is deterministic for a given
-input). See `evidence/README.md` for the full input → expected output
-map.
+Each regenerated file should be **byte-identical** to the one already in
+`evidence/fixed_outputs/` — the solver is deterministic for a given input.
+See **`evidence/README.md`** for the full input → expected output map
+and the bug-fix story required by the "Verification Evidence" judging
+criterion.
 
-## Offline-capable
+---
+
+## 🛜 Offline-capable
 
 - Frontend has **zero external dependencies** (no CDN, no Google Fonts).
 - Solver uses **HiGHS** (open-source, bundled inside the `highspy` wheel
@@ -115,16 +155,20 @@ map.
 - The Docker image is fully self-contained; once pulled, no network is
   required to solve or to render the UI.
 
-## Dependencies (pinned loosely)
+---
 
-| Package          | Used for                                      |
-|------------------|-----------------------------------------------|
-| `fastapi>=0.110` | HTTP framework, OpenAPI generation            |
-| `uvicorn[standard]>=0.27` | ASGI server                          |
-| `pydantic>=2.0`  | Request validation, schema docs               |
-| `pulp>=2.7`      | MILP modelling                                 |
-| `highspy>=1.5`   | Open-source solver PuLP binds to by default    |
+## 📦 Dependencies (pinned loosely)
 
-## License
+| Package                  | Used for                                      |
+|--------------------------|-----------------------------------------------|
+| `fastapi>=0.110`         | HTTP framework, OpenAPI generation            |
+| `uvicorn[standard]>=0.27`| ASGI server                                    |
+| `pydantic>=2.0`          | Request validation, schema docs               |
+| `pulp>=2.7`              | MILP modelling                                |
+| `highspy>=1.5`           | Open-source solver PuLP binds to by default   |
+
+---
+
+## 🪪 License
 
 MIT (academic / hackathon use).

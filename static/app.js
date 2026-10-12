@@ -10,6 +10,7 @@
   const els = {
     btnSample:  document.getElementById("btn-load-sample"),
     btnSolve:   document.getElementById("btn-solve"),
+    btnPrint:   document.getElementById("btn-print"),
     status:     document.getElementById("solver-status"),
     elapsed:    document.getElementById("solver-elapsed"),
     input:      document.getElementById("input-json"),
@@ -297,6 +298,9 @@
     els.kpiValue.textContent  = fmt(result.total_value_served, 1);
     els.kpiFuel.textContent   = fmt(result.total_fuel_used_litres, 2) + " L";
 
+    // reveal the print button now that there is a roster to print
+    if (els.btnPrint) els.btnPrint.hidden = false;
+
     // infeasible banner
     if (result.status === "infeasible" || (result.infeasibility_reasons && result.infeasibility_reasons.length > 0)) {
       els.infeas.hidden = false;
@@ -365,6 +369,13 @@
     } finally {
       els.btnSolve.disabled = false;
     }
+  });
+
+  // Print the rendered roster board to a single A4 page.
+  // The @media print block in styles.css strips out everything except the
+  // result card, KPIs, fuel chart, roster table, and dark-reason list.
+  els.btnPrint.addEventListener("click", function () {
+    window.print();
   });
 
   // pre-load sample so the page is interactive on first open

@@ -393,3 +393,217 @@ footer {
   .card { padding: 1rem; }
   .kpi-value { font-size: 1.2rem; }
 }
+
+/* ----------------------------------------------------------------------- */
+/* Print: A4-friendly roster                                              */
+/* ----------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  /* Reset page chrome */
+  html, body {
+    background: white;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide everything that isn't the result */
+  header,
+  footer,
+  .button-row,
+  #input-card,
+  #input-json,
+  #input-error,
+  #solver-status,
+  #solver-elapsed,
+  .btn {
+    display: none !important;
+  }
+
+  main {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+  }
+
+  /* Print-friendly cards: drop shadow, border, padding tweaks */
+  .card {
+    background: white;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0.5rem 0;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid splitting mid-element where possible */
+  h2, h3, .kpi, .banner, .reason-card {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  /* KPIs: keep together, no big gaps */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+    margin: 0.4rem 0;
+  }
+  .kpi {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 0.4rem 0.5rem;
+  }
+  .kpi-value {
+    font-size: 1.1rem;
+    color: #000;
+  }
+
+  /* Banner stays inline, no card look */
+  .banner {
+    background: #fef2f2 !important;
+    border: 1px solid #fecaca !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Fuel chart: flatten so it doesn't overflow the page width */
+  .fuel-chart {
+    height: 90px;
+    padding: 0.25rem 0.2rem 0.2rem;
+    margin-bottom: 0.2rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .fuel-bar {
+    background: #2563eb !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .fuel-bar.zero { background: #e5e7eb !important; }
+  .fuel-bar .lbl {
+    color: #000;
+  }
+  .fuel-hour {
+    color: #000;
+  }
+
+  /* Roster table: collapse borders, 1px solid, and let each row stay intact */
+  .table-scroll {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    page-break-inside: auto;
+  }
+
+  #roster-table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    font-size: 0.75rem;
+    background: white;
+  }
+
+  #roster-table th,
+  #roster-table td {
+    border: 1px solid #000 !important;
+    padding: 0.25rem 0.35rem;
+    text-align: center;
+    background: white !important;
+    color: #000 !important;
+    position: static !important;
+  }
+
+  #roster-table thead th {
+    background: #f3f4f6 !important;
+    font-weight: 600;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #roster-table tbody tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #roster-table th.shop-col,
+  #roster-table td.shop-col {
+    text-align: left;
+    background: white !important;
+    min-width: 0;
+  }
+
+  #roster-table thead th.shop-col { background: #f3f4f6 !important; }
+
+  #roster-table tbody tr:hover { background: white !important; }
+
+  /* Cell colors: keep semantic shading on paper */
+  .cell-on {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cell-grid {
+    background: #e0e7ff !important;
+    color: #3730a3 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cell-off {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cell-off.mandatory {
+    background: #fecaca !important;
+    outline: 1px solid #f87171 !important;
+  }
+
+  .shop-type { display: inline-block; }
+  .shop-type.mandatory { background: #fef3c7 !important; color: #92400e !important; }
+  .shop-type.normal    { background: #e0e7ff !important; color: #3730a3 !important; }
+
+  /* Dark-reason list: keep each card together, drop the card chrome to ink */
+  #dark-reason-list {
+    display: block;
+    margin-top: 0.4rem;
+  }
+  .reason-card {
+    background: white !important;
+    border: 1px solid #d1d5db !important;
+    border-left: 4px solid #f97316 !important;
+    border-radius: 0;
+    padding: 0.4rem 0.6rem;
+    margin-bottom: 0.4rem;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    color: #000;
+  }
+  .reason-card h4 {
+    color: #000;
+  }
+  .reason-card.empty {
+    background: white !important;
+    border-color: #d1d5db !important;
+    border-left-color: #16a34a !important;
+  }
+  .reason-card.empty h4 { color: #000; }
+  .reason-card.empty .muted { color: #000; }
+
+  /* Don't waste paper on the hidden results card before solve */
+  #results-card[hidden] { display: none !important; }
+
+  /* Suppress links / page-URL artifacts */
+  a { color: inherit; text-decoration: none; }
+}

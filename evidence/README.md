@@ -247,29 +247,36 @@ conflict.
 
 ## ✅ Boundary-check inputs
 
-The same evidence loop covers the four "boundary conditions" the brief
+The same evidence loop covers all the boundary conditions the brief
 calls out, all bundled in `evidence/inputs/`:
 
 | Input                                            | Expected behaviour                                                                    | Fixed output                                                |
 |--------------------------------------------------|---------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `sample_shapla.json`                             | Full 12-shop / 10-hour Shapla Shopping Complex solve; deterministic output, value 84  | `fixed_outputs/sample_shapla.fixed.json`                    |
-| `tiny_3shop_feasible.json`                       | 1 outage hour, 3 shops (1 mandatory, 2 normal); fuel-tier 10 kW → 1.4 L               | `fixed_outputs/tiny_3shop_feasible.fixed.json`              |
+| `sample_shapla.json`                             | Full 12-shop / 10-hour Shapla Shopping Complex solve; deterministic output, value 292  | `fixed_outputs/sample_shapla.fixed.json`                    |
+| `tiny_3shop_feasible.json`                       | 1 outage hour, 3 shops (1 mandatory, 2 normal); tier-select solver → 0.9 L            | `fixed_outputs/tiny_3shop_feasible.fixed.json`              |
 | `happy_path_balanced.json`                       | 2 outage hours, 4 shops; tests value-vs-fuel tradeoff                                | `fixed_outputs/happy_path_balanced.fixed.json`              |
-| `mandatory_overload_infeasible.json`             | Mandatory load > generator capacity → `status: infeasible`                           | `fixed_outputs/mandatory_overload_infeasible.fixed.json`    |
-| `zero_fuel_infeasible.json`                      | `fuel_budget_litres = 0` with outage hours → `status: infeasible`                     | `fixed_outputs/zero_fuel_infeasible.fixed.json`             |
+| `mandatory_overload_infeasible.json`             | Mandatory load > generator capacity → `status: infeasible` (fast-failed in O(N))     | `fixed_outputs/mandatory_overload_infeasible.fixed.json`    |
+| `zero_fuel_infeasible.json`                      | `fuel_budget_litres = 0` with outage hours → `status: infeasible` (fast-failed in O(N)) | `fixed_outputs/zero_fuel_infeasible.fixed.json`           |
+| `consecutive_dark_violation.json`                | Rule 6 trip: 3 outage hours, normal shop needs to be on, capacity forbids it         | `fixed_outputs/consecutive_dark_violation.fixed.json`       |
+| `conflict_simulation.json`                       | Rule 6 vs Rule 3 conflict; solver names both rules + shops in the reasons list        | `fixed_outputs/conflict_simulation.fixed.json`              |
+| `strict_boundary.json`                           | Tight budget: solver uses exactly `1.20 L` of fuel (boundary hit, not slack)         | `fixed_outputs/strict_boundary.fixed.json`                  |
+| `invalid_schema.json`                            | Strict-mode validation: negative fuel, duplicate ids, missing fields → HTTP 400      | `fixed_outputs/invalid_schema.fixed.json` (400 body)        |
 
 ---
 
 ## 🗺 Index of every file in this folder
 
-| Input                                          | Fixed output                                              | Broken output (before fix)                        | What it demonstrates                                                |
-|------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------|
-| `inputs/sample_shapla.json`                    | `fixed_outputs/sample_shapla.fixed.json`                  | `broken_outputs/sample_shapla.broken.json`        | Full 12-shop / 10-hour Shapla Shopping Complex solve                 |
-| `inputs/tiny_3shop_feasible.json`              | `fixed_outputs/tiny_3shop_feasible.fixed.json`            | `broken_outputs/tiny_3shop.broken.json`           | Step-function fuel-tier selection (load-in-bracket)                  |
-| `inputs/happy_path_balanced.json`              | `fixed_outputs/happy_path_balanced.fixed.json`            | -                                                 | Value-vs-fuel tradeoff across 4 hours                                |
-| `inputs/mandatory_overload_infeasible.json`    | `fixed_outputs/mandatory_overload_infeasible.fixed.json`  | `broken_outputs/mandatory_overload.broken.json`  | Mandatory shop exceeds generator capacity → reported infeasible      |
-| `inputs/zero_fuel_infeasible.json`             | `fixed_outputs/zero_fuel_infeasible.fixed.json`           | -                                                 | Fuel budget = 0 with outage hours → reported infeasible with reason  |
-| `inputs/consecutive_dark_violation.json`       | `fixed_outputs/consecutive_dark_violation.fixed.json`     | `broken_outputs/consecutive_dark_violation.broken.json` | **Headline bug story** — "no shop dark three hours in a row" rule |
+| Input                                          | Fixed output                                              | Broken output (before fix)                              | What it demonstrates                                                |
+|------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------|----------------------------------------------------------------------|
+| `inputs/sample_shapla.json`                    | `fixed_outputs/sample_shapla.fixed.json`                  | `broken_outputs/sample_shapla.broken.json`              | Full 12-shop / 10-hour Shapla Shopping Complex solve                 |
+| `inputs/tiny_3shop_feasible.json`              | `fixed_outputs/tiny_3shop_feasible.fixed.json`            | `broken_outputs/tiny_3shop.broken.json`                 | Step-function fuel-tier selection (load-in-bracket)                  |
+| `inputs/happy_path_balanced.json`              | `fixed_outputs/happy_path_balanced.fixed.json`            | -                                                       | Value-vs-fuel tradeoff across 4 hours                                |
+| `inputs/mandatory_overload_infeasible.json`    | `fixed_outputs/mandatory_overload_infeasible.fixed.json`  | `broken_outputs/mandatory_overload.broken.json`         | Mandatory shop exceeds generator capacity → reported infeasible      |
+| `inputs/zero_fuel_infeasible.json`             | `fixed_outputs/zero_fuel_infeasible.fixed.json`           | -                                                       | Fuel budget = 0 with outage hours → reported infeasible with reason  |
+| `inputs/consecutive_dark_violation.json`       | `fixed_outputs/consecutive_dark_violation.fixed.json`     | `broken_outputs/consecutive_dark_violation.broken.json` | **Headline bug story** — "no shop dark three hours in a row" rule     |
+| `inputs/conflict_simulation.json`              | `fixed_outputs/conflict_simulation.fixed.json`            | -                                                       | Rule 6 vs Rule 3 conflict: max-consecutive-dark forces a normal shop on, capacity forbids it |
+| `inputs/strict_boundary.json`                  | `fixed_outputs/strict_boundary.fixed.json`                | -                                                       | Exact-budget boundary: solver uses exactly `1.20 L` of fuel         |
+| `inputs/invalid_schema.json`                   | `fixed_outputs/invalid_schema.fixed.json` (HTTP 400)      | -                                                       | Strict-mode validation: negative fuel, duplicate ids, missing fields |
 
 ---
 
@@ -288,4 +295,37 @@ done
 
 Every `fixed_outputs/<name>.fixed.json` is **byte-identical** to what
 the server returns (the inputs are deterministic and the MILP solver
-is seed-stable).
+is seed-stable). The one exception is `invalid_schema.json`, which
+deliberately 400s and gets saved as a `{"status_code": 400, "detail": ...}`
+envelope — not a roster.
+
+## 🤖 Automated evidence suite (judges: start here)
+
+`evidence/verify.py` is the executable version of the same loop —
+it re-runs every fixture, asserts the right `status` / numeric
+outputs / `infeasibility_reasons`, and prints a `rich` table that
+judges can read at a glance.  Two modes:
+
+```bash
+# Standalone (no server needed, calls the solver in-process):
+source backend/.venv/bin/activate
+python evidence/verify.py
+
+# Or against the live server:
+./run.sh &
+python evidence/verify.py --base-url http://localhost:8000
+```
+
+The script covers the three classes of inputs the API contract
+guarantees:
+
+* **feasible** — `status: ok`, value/fuel match the recorded
+  `fixed_outputs/*.json` to 2 decimals.
+* **infeasible** — `status: infeasible` and the
+  `infeasibility_reasons` list names the right rule + shop
+  (e.g. "Mandatory load 8 kW exceeds generator capacity 5 kW").
+* **invalid schema** — HTTP 400 with the canonical
+  `invalid_input:` detail prefix.
+
+Exit code is 0 on full pass, 1 on any failed assertion.  See
+`evidence/verify.py --help` for the full CLI.

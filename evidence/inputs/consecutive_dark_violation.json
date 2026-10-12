@@ -1,0 +1,16 @@
+{
+  "_story": "Headline bug-fix story. 3 consecutive outage hours, max_consecutive_dark=2. Mandatory load is 4 kW (2+2), and the only normal shop needs 2 kW to satisfy Rule 6. Mandatory+normal = 6 kW > 5 kW capacity, so the problem is provably infeasible: the normal shop must be on in at least one of the 3 outage hours, but there is no slack to do so. The buggy run-end counter missed this because it only fired at the end of the run. The fixed sliding-window constraint plus the post-solve infeasibility check catches it.",
+  "grid_available": [true, false, false, false],
+  "generator_capacity_kw": 5,
+  "fuel_budget_litres": 5.0,
+  "max_consecutive_dark": 2,
+  "fuel_table": [
+    {"load_kw": 3, "litres_per_hour": 0.5},
+    {"load_kw": 5, "litres_per_hour": 0.8}
+  ],
+  "shops": [
+    {"id": "pharmacy",       "kw": 2, "type": "mandatory", "value_per_slot": [10, 10, 10, 10]},
+    {"id": "tea_stall",      "kw": 2, "type": "mandatory", "value_per_slot": [10, 10, 10, 10]},
+    {"id": "low_value_shop", "kw": 2, "type": "normal",    "value_per_slot": [ 1,  1,  1,  1]}
+  ]
+}

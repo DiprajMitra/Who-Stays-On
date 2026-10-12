@@ -4,7 +4,6 @@
   "generator_capacity_kw": 5,
   "fuel_budget_litres": 5.0,
   "fuel_table": [
-    {"load_kw": 0, "litres_per_hour": 0.0},
     {"load_kw": 3, "litres_per_hour": 0.50},
     {"load_kw": 5, "litres_per_hour": 0.90}
   ],

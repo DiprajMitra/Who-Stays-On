@@ -1,0 +1,16 @@
+{
+  "status": "infeasible",
+  "total_value_served": 0.0,
+  "total_fuel_used_litres": 0.0,
+  "hourly_fuel_litres": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "shops": [],
+  "infeasibility_reasons": [
+    "Shop 'grocery_fridge' is dark for the full 3-hour window starting at hour 1 (> max_consecutive_dark=2)."
+  ]
+}

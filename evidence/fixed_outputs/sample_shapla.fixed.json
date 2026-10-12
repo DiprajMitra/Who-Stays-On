@@ -1,1 +1,277 @@
-{"status":"ok","total_value_served":292.0,"total_fuel_used_litres":16.4,"hourly_fuel_litres":[0.0,0.0,2.0,2.0,2.8,2.0,0.0,2.8,2.8,2.0],"shops":[{"shop_id":"pharmacy","power_state":[1,1,1,1,1,1,1,1,1,1],"total_value_served":60.0,"dark_reasons":[]},{"shop_id":"atm_booth","power_state":[1,1,1,1,1,1,1,1,1,1],"total_value_served":40.0,"dark_reasons":[]},{"shop_id":"tailor_jamal","power_state":[1,1,1,0,0,1,1,0,1,0],"total_value_served":20.0,"dark_reasons":["Hour 3: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: tailor_jamal is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 7: tailor_jamal is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"mobile_shop","power_state":[1,1,0,1,0,0,1,0,1,1],"total_value_served":24.0,"dark_reasons":["Hour 2: mobile_shop is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: mobile_shop is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: mobile_shop is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 7: mobile_shop is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"photocopy","power_state":[1,1,1,0,0,1,1,1,0,0],"total_value_served":18.0,"dark_reasons":["Hour 3: photocopy is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: photocopy is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 8: photocopy is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: photocopy is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"tea_stall","power_state":[1,1,1,0,0,1,1,1,1,0],"total_value_served":17.0,"dark_reasons":["Hour 3: tea_stall is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: tea_stall is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: tea_stall is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"beauty_salon","power_state":[1,1,0,0,1,0,1,1,0,0],"total_value_served":15.0,"dark_reasons":["Hour 2: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 3: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 8: beauty_salon is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"grocery_fridge","power_state":[1,1,0,0,1,0,1,1,0,0],"total_value_served":18.0,"dark_reasons":["Hour 2: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 3: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 8: grocery_fridge is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"electronics","power_state":[1,1,0,0,1,0,1,0,1,0],"total_value_served":17.0,"dark_reasons":["Hour 2: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 3: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 7: electronics is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"restaurant","power_state":[1,1,0,1,0,0,1,0,0,1],"total_value_served":23.0,"dark_reasons":["Hour 2: restaurant is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: restaurant is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 7: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 8: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"jewellery","power_state":[1,1,0,0,1,0,1,1,0,0],"total_value_served":15.0,"dark_reasons":["Hour 2: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 3: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 5: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 8: jewellery is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]},{"shop_id":"clothing","power_state":[1,1,1,0,0,1,1,1,1,0],"total_value_served":25.0,"dark_reasons":["Hour 3: clothing is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 4: clothing is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.","Hour 9: clothing is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."]}],"infeasibility_reasons":[]}
+{
+  "status": "ok",
+  "total_value_served": 292.0,
+  "total_fuel_used_litres": 16.4,
+  "hourly_fuel_litres": [
+    0.0,
+    0.0,
+    2.0,
+    2.0,
+    2.8,
+    2.0,
+    0.0,
+    2.8,
+    2.8,
+    2.0
+  ],
+  "shops": [
+    {
+      "shop_id": "pharmacy",
+      "power_state": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "total_value_served": 60.0,
+      "dark_reasons": []
+    },
+    {
+      "shop_id": "atm_booth",
+      "power_state": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "total_value_served": 40.0,
+      "dark_reasons": []
+    },
+    {
+      "shop_id": "tailor_jamal",
+      "power_state": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "total_value_served": 17.0,
+      "dark_reasons": [
+        "Hour 2: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 3: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 7: tailor_jamal is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: tailor_jamal is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "mobile_shop",
+      "power_state": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "total_value_served": 24.0,
+      "dark_reasons": [
+        "Hour 2: mobile_shop is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: mobile_shop is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: mobile_shop is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 7: mobile_shop is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "photocopy",
+      "power_state": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "total_value_served": 18.0,
+      "dark_reasons": [
+        "Hour 3: photocopy is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: photocopy is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 8: photocopy is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: photocopy is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "tea_stall",
+      "power_state": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "total_value_served": 17.0,
+      "dark_reasons": [
+        "Hour 3: tea_stall is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: tea_stall is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: tea_stall is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "beauty_salon",
+      "power_state": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "total_value_served": 18.0,
+      "dark_reasons": [
+        "Hour 3: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: beauty_salon is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 8: beauty_salon is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: beauty_salon is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "grocery_fridge",
+      "power_state": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "total_value_served": 18.0,
+      "dark_reasons": [
+        "Hour 2: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 3: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 8: grocery_fridge is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: grocery_fridge is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "electronics",
+      "power_state": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "total_value_served": 17.0,
+      "dark_reasons": [
+        "Hour 2: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 3: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 7: electronics is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: electronics is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "restaurant",
+      "power_state": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "total_value_served": 23.0,
+      "dark_reasons": [
+        "Hour 2: restaurant is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: restaurant is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 7: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 8: restaurant is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "jewellery",
+      "power_state": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "total_value_served": 15.0,
+      "dark_reasons": [
+        "Hour 2: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 3: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 5: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 8: jewellery is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: jewellery is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "clothing",
+      "power_state": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "total_value_served": 25.0,
+      "dark_reasons": [
+        "Hour 3: clothing is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 4: clothing is dark. Generator on tier 20 kW (2.8 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 9: clothing is dark. Generator on tier 14 kW (2 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    }
+  ],
+  "infeasibility_reasons": []
+}

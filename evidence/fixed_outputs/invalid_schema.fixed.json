@@ -1,0 +1,4 @@
+{
+  "status_code": 400,
+  "detail": "invalid_input: fuel_budget_litres must be a non-negative number"
+}

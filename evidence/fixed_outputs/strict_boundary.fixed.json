@@ -1,0 +1,53 @@
+{
+  "status": "ok",
+  "total_value_served": 25.0,
+  "total_fuel_used_litres": 1.2,
+  "hourly_fuel_litres": [
+    0.0,
+    0.6,
+    0.6,
+    0.0
+  ],
+  "shops": [
+    {
+      "shop_id": "pharmacy",
+      "power_state": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "total_value_served": 20.0,
+      "dark_reasons": []
+    },
+    {
+      "shop_id": "tea_stall",
+      "power_state": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "total_value_served": 2.0,
+      "dark_reasons": [
+        "Hour 1: tea_stall is dark. Generator on tier 3 kW (0.6 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 2: tea_stall is dark. Generator on tier 3 kW (0.6 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    },
+    {
+      "shop_id": "tailor",
+      "power_state": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "total_value_served": 3.0,
+      "dark_reasons": [
+        "Hour 1: tailor is dark. Generator on tier 3 kW (0.6 L/h); capacity was fully taken by higher-priority shops this hour.",
+        "Hour 2: tailor is dark. Generator on tier 3 kW (0.6 L/h); capacity was fully taken by higher-priority shops this hour."
+      ]
+    }
+  ],
+  "infeasibility_reasons": []
+}

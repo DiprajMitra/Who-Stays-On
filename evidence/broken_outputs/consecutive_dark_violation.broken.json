@@ -1,0 +1,13 @@
+{
+  "_bug": "EARLIER DRAFT - run-end counter fired after the outage window closed, so the solver happily left low_value_shop dark for all 3 outage hours and reported status=ok. The fixed sliding-window constraint plus the post-solve infeasibility sweep catches this case.",
+  "status": "ok",
+  "total_value_served": 80.0,
+  "total_fuel_used_litres": 2.4,
+  "hourly_fuel_litres": [0.0, 0.8, 0.8, 0.8],
+  "shops": [
+    {"shop_id": "pharmacy",       "power_state": [1, 1, 1, 1], "dark_reasons": []},
+    {"shop_id": "tea_stall",      "power_state": [1, 1, 1, 1], "dark_reasons": []},
+    {"shop_id": "low_value_shop", "power_state": [1, 0, 0, 0], "dark_reasons": []}
+  ],
+  "_what_was_wrong": "Consecutive-dark was a run-end counter instead of a sliding-window constraint. The MILP now uses pulp.lpSum(x[i,t] for t in window) >= 1 over every contiguous window of size W = max_consecutive_dark + 1, and a post-solve sweep in _collect_feasibility_warnings() demotes any remaining violation to status=infeasible with a human-readable reason."
+}

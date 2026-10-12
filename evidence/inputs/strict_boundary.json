@@ -4,9 +4,8 @@
   "generator_capacity_kw": 3,
   "fuel_budget_litres": 1.20,
   "fuel_table": [
-    {"load_kw": 0, "litres_per_hour": 0.0},
-    {"load_kw": 3, "litres_per_hour": 0.60},
-    {"load_kw": 4, "litres_per_hour": 0.80}
+    {"load_kw": 1, "litres_per_hour": 0.20},
+    {"load_kw": 3, "litres_per_hour": 0.60}
   ],
   "max_consecutive_dark": 2,
   "shops": [

@@ -92,6 +92,27 @@ static/index.html  ──(paste JSON, click "Solve")──▶
 
 ## Testing with the bundled evidence
 
+### One-shot executable evidence suite (recommended for judges)
+
+A single command re-runs every fixture, asserts the right
+`status` / `value` / `fuel` / `infeasibility_reasons`, and prints a
+green-table summary you can read at a glance:
+
+```bash
+# Standalone — no server needed, calls the solver in-process:
+source backend/.venv/bin/activate
+python evidence/verify.py
+
+# Or against a live server (boots via ./run.sh first):
+./run.sh &                                   # port 8000
+python evidence/verify.py --base-url http://localhost:8000
+```
+
+Exit code is 0 on full pass, 1 on any failed assertion.  See
+`evidence/verify.py --help` for the full CLI.
+
+### Manual reproduction with curl
+
 After `./run.sh`:
 
 ```bash

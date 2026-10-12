@@ -1,0 +1,12 @@
+{
+  "_bug": "EARLIER DRAFT - naive greedy solver: in each outage hour, sort shops by value_per_slot and greedily pack them until capacity / fuel is hit.",
+  "status": "optimal",
+  "total_value_served": 246.0,
+  "total_fuel_used_litres": 16.4,
+  "_expected_fixed": {
+    "total_value_served": 292.0,
+    "total_fuel_used_litres": 16.4,
+    "note": "Same fuel budget, +46 value: the greedy version locked in early-hour decisions (e.g. keeping the restaurant at slot 3 because it had value 6) and never revisited them. The MILP formulation (binary x[i,t] across all hours, single fuel budget, look-ahead across the whole day) finds the jointly optimal assignment."
+  },
+  "_what_was_wrong": "Greedy is myopic. Dropping the tailor_jamal at slot 0 looks fine locally, but the optimum reuses that kW at slot 8 for the much-higher-value restaurant. The MILP trades across the whole day at once."
+}

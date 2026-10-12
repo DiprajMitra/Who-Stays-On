@@ -1,0 +1,1 @@
+{"status":"infeasible","total_value_served":0.0,"total_fuel_used_litres":0.0,"hourly_fuel_litres":[0.0,0.0,0.0,0.0],"shops":[],"infeasibility_reasons":["Solver status: Infeasible.","Minimum fuel required for mandatory shops across 3 outage hours is 1.50 L (budget 0.00 L, tier 3 kW)."]}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Who Stays On? — Load-shedding Roster</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>Who Stays On?</h1>
+      <p class="tagline">
+        Optimise which shops in the complex run on the diesel generator during
+        today's outage windows. Powered by a Mixed-Integer Linear Program.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============== INPUT PANEL ============== -->
+    <section class="card" id="input-card">
+      <h2>1. Inputs</h2>
+      <p class="muted">
+        Paste a JSON problem description or load the sample Shapla Shopping
+        Complex dataset. Then click <strong>Solve</strong>.
+      </p>
+
+      <div class="button-row">
+        <button id="btn-load-sample" class="btn btn-secondary">Load sample</button>
+        <button id="btn-solve" class="btn btn-primary">Solve</button>
+        <span id="solver-status" class="status-pill" data-state="idle">idle</span>
+        <span id="solver-elapsed" class="muted small"></span>
+      </div>
+
+      <textarea
+        id="input-json"
+        spellcheck="false"
+        placeholder='{"grid_available": [...], ...}'
+      ></textarea>
+      <p class="error" id="input-error" hidden></p>
+    </section>
+
+    <!-- ============== RESULTS ============== -->
+    <section class="card" id="results-card" hidden>
+      <h2>2. Result</h2>
+
+      <div id="infeasible-banner" class="banner banner-error" hidden>
+        <h3>Infeasible problem</h3>
+        <ul id="infeasibility-reasons"></ul>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Total value served</div>
+          <div class="kpi-value" id="kpi-value">—</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Fuel used</div>
+          <div class="kpi-value" id="kpi-fuel">—</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Status</div>
+          <div class="kpi-value" id="kpi-status">—</div>
+        </div>
+      </div>
+
+      <h3>Hourly fuel burn (litres / hour)</h3>
+      <div class="fuel-chart" id="fuel-chart"></div>
+
+      <h3>Shop × hour roster</h3>
+      <p class="muted small">
+        <span class="legend on">ON</span>
+        <span class="legend grid">grid</span>
+        <span class="legend off">off</span>
+        Hover any dark cell to see why that shop is dark.
+      </p>
+      <div class="table-scroll">
+        <table id="roster-table"></table>
+      </div>
+
+      <h3>Dark-reason detail</h3>
+      <div id="dark-reason-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="muted small">
+      Solver: PuLP 4 + HiGHS, served by FastAPI. All assets bundled — no
+      internet required.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

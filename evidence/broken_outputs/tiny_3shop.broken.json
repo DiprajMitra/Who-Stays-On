@@ -1,0 +1,14 @@
+{
+  "_bug": "EARLIER DRAFT - solver used a continuous fuel model (any load -> proportional fuel), which violated the step-function nature of the diesel generator.",
+  "status": "optimal",
+  "total_value_served": 19.0,
+  "total_fuel_used_litres": 2.4,
+  "hourly_fuel_litres": [2.4],
+  "_expected_fixed": {
+    "total_value_served": 19.0,
+    "total_fuel_used_litres": 1.4,
+    "hourly_fuel_litres": [1.4],
+    "note": "Actual demand 6 kW falls in the 6 kW tier (0.9 L/h in the old table) or the top tier in this fixture (1.4 L/h). The fix replaces the continuous model with a discrete tier-selection variable z[k, t] + load-in-bracket constraint."
+  },
+  "_what_was_wrong": "Continuous model let the generator draw fractional fuel for fractional loads, which is physically wrong for a step-function generator. Worse, it let the solver choose loads that would never correspond to a real fuel curve, producing underestimates that would have been caught only at the pump."
+}

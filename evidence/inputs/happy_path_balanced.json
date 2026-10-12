@@ -1,0 +1,38 @@
+{
+  "_story": "Balanced 4-hour case: 2 outage hours, 4 shops, exact-fuel budget. Shows value-vs-fuel tradeoff.",
+  "grid_available": [true, false, false, true],
+  "generator_capacity_kw": 8,
+  "fuel_budget_litres": 2.0,
+  "fuel_table": [
+    {"load_kw": 3, "litres_per_hour": 0.6},
+    {"load_kw": 6, "litres_per_hour": 1.0},
+    {"load_kw": 8, "litres_per_hour": 1.4}
+  ],
+  "max_consecutive_dark": 1,
+  "shops": [
+    {
+      "id": "atm",
+      "kw": 2,
+      "type": "mandatory",
+      "value_per_slot": [5, 5, 5, 5]
+    },
+    {
+      "id": "restaurant",
+      "kw": 3,
+      "type": "normal",
+      "value_per_slot": [3, 4, 5, 6]
+    },
+    {
+      "id": "grocery_fridge",
+      "kw": 3,
+      "type": "normal",
+      "value_per_slot": [2, 3, 4, 5]
+    },
+    {
+      "id": "tea_stall",
+      "kw": 1,
+      "type": "normal",
+      "value_per_slot": [1, 2, 3, 4]
+    }
+  ]
+}

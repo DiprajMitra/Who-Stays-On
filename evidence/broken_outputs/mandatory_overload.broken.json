@@ -1,0 +1,19 @@
+{
+  "_bug": "EARLIER DRAFT - solver silently dropped the mandatory shop and reported 'optimal'.",
+  "status": "optimal",
+  "total_value_served": 5.0,
+  "total_fuel_used_litres": 0.0,
+  "hourly_fuel_litres": [0.0, 0.0],
+  "_expected_fixed": {
+    "status": "infeasible",
+    "total_value_served": 0.0,
+    "total_fuel_used_litres": 0.0,
+    "hourly_fuel_litres": [0.0, 0.0],
+    "infeasibility_reasons": [
+      "Solver status: Infeasible.",
+      "Mandatory load 8 kW exceeds generator capacity 5 kW.",
+      "Generator capacity 5 kW is too small to power all mandatory shops (8 kW)."
+    ]
+  },
+  "_what_was_wrong": "The mandatory-shop constraint was a soft preference (high penalty, not a hard == 1), so the solver could drop the hospital_ward if its value-per-slot didn't quite justify the kW. The fix turned it into a hard equality constraint for every outage hour, then added a post-solve infeasibility check that emits human-readable reasons."
+}

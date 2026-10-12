@@ -1,0 +1,19 @@
+{
+  "_story": "Infeasible: outage hours exist, but fuel_budget_litres is 0. Generator cannot run.",
+  "grid_available": [true, false, false, false],
+  "generator_capacity_kw": 10,
+  "fuel_budget_litres": 0.0,
+  "fuel_table": [
+    {"load_kw": 3, "litres_per_hour": 0.5},
+    {"load_kw": 10, "litres_per_hour": 1.4}
+  ],
+  "max_consecutive_dark": 2,
+  "shops": [
+    {
+      "id": "pharmacy",
+      "kw": 3,
+      "type": "mandatory",
+      "value_per_slot": [10, 10, 10, 10]
+    }
+  ]
+}

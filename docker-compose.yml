@@ -1,0 +1,31 @@
+# Single-service compose. Maps host port 8000 -> container port 8000.
+#
+# Usage:
+#   docker compose up --build       # build + run in the foreground
+#   docker compose up --build -d    # background
+#
+# To override the port:
+#   PORT=9000 docker compose up --build
+# (see the environment block below)
+
+services:
+  who-stays-on:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: who-stays-on:local
+    container_name: who-stays-on
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8000}:8000"
+    volumes:
+      # Mount the evidence folder read-only so judges can inspect it from
+      # inside the container without rebuilding the image.
+      - ./evidence:/app/evidence:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; \
+sys.exit(0) if urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2).status==200 else sys.exit(1)"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

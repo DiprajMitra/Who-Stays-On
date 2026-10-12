@@ -1,0 +1,32 @@
+{
+  "_story": "Conflict simulation (infeasible): mandatory pharmacy (3 kW) + normal grocery_fridge (3 kW) = 6 kW > 5 kW capacity. The grocery_fridge has been dark for max_consecutive_dark=2 consecutive outage hours, so Rule 6 forces it on in the 3rd outage hour, but Rule 3 (capacity) forbids it. The solver must report infeasibility with both rules and shops named.",
+  "grid_available": [true, false, false, false, true],
+  "generator_capacity_kw": 5,
+  "fuel_budget_litres": 5.0,
+  "fuel_table": [
+    {"load_kw": 0, "litres_per_hour": 0.0},
+    {"load_kw": 3, "litres_per_hour": 0.50},
+    {"load_kw": 5, "litres_per_hour": 0.90}
+  ],
+  "max_consecutive_dark": 2,
+  "shops": [
+    {
+      "id": "pharmacy",
+      "kw": 3,
+      "type": "mandatory",
+      "value_per_slot": [5, 5, 5, 5, 5]
+    },
+    {
+      "id": "grocery_fridge",
+      "kw": 3,
+      "type": "normal",
+      "value_per_slot": [4, 3, 6, 7, 5]
+    },
+    {
+      "id": "tea_stall",
+      "kw": 1,
+      "type": "normal",
+      "value_per_slot": [2, 1, 1, 1, 1]
+    }
+  ]
+}

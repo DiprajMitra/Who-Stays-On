@@ -1,0 +1,25 @@
+{
+  "_story": "Infeasible: a single mandatory shop (8 kW) exceeds the generator capacity (5 kW).",
+  "grid_available": [false, false],
+  "generator_capacity_kw": 5,
+  "fuel_budget_litres": 10.0,
+  "fuel_table": [
+    {"load_kw": 3, "litres_per_hour": 0.5},
+    {"load_kw": 5, "litres_per_hour": 0.8}
+  ],
+  "max_consecutive_dark": 1,
+  "shops": [
+    {
+      "id": "hospital_ward",
+      "kw": 8,
+      "type": "mandatory",
+      "value_per_slot": [100, 100]
+    },
+    {
+      "id": "pharmacy",
+      "kw": 2,
+      "type": "normal",
+      "value_per_slot": [5, 5]
+    }
+  ]
+}

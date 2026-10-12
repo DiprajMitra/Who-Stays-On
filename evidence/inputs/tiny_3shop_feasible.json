@@ -1,0 +1,32 @@
+{
+  "_story": "Tiny sanity case: 1 outage hour, 3 shops (1 mandatory, 2 normal). Trivially feasible.",
+  "grid_available": [false],
+  "generator_capacity_kw": 10,
+  "fuel_budget_litres": 5.0,
+  "fuel_table": [
+    {"load_kw": 3, "litres_per_hour": 0.5},
+    {"load_kw": 6, "litres_per_hour": 0.9},
+    {"load_kw": 10, "litres_per_hour": 1.4}
+  ],
+  "max_consecutive_dark": 1,
+  "shops": [
+    {
+      "id": "pharmacy",
+      "kw": 3,
+      "type": "mandatory",
+      "value_per_slot": [10]
+    },
+    {
+      "id": "tea_stall",
+      "kw": 1,
+      "type": "normal",
+      "value_per_slot": [4]
+    },
+    {
+      "id": "mobile_shop",
+      "kw": 2,
+      "type": "normal",
+      "value_per_slot": [5]
+    }
+  ]
+}

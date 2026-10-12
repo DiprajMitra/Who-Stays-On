@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenv
+backend/.venv/
+backend/venv/
+.venv/
+venv/
+ENV/
+env/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+*.code-workspace
+.puku-cli/
+
+# Build artefacts
+dist/
+build/
+*.egg
+
+# Local environment overrides
+.env
+.env.*
+!.env.example
+
+# Docker & Logs
+*.log
+
